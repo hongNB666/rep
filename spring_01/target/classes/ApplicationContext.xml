@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:component-scan base-package="com.itheima"></context:component-scan>
+   <bean id="userService" class="com.itheima.service.UserserviceImpl">
+        <property name="userdao" ref="userdao"></property>
+    </bean>
+    <bean id="userdao" class="com.itheima.dao.Userdaoimpl">
+
+        <property name="list">
+            <list >
+                <value>aaaa</value>
+                <value>cccc</value>
+                <value>bbb</value>
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="username" value="张三"/>
+                <entry key="name" value="李四"/>
+                <entry key="user" value="王五"/>
+                <entry key="usame" value="赵六"/>
+            </map>
+        </property>
+    </bean>
+    <bean id="Userservice" class="com.itheima.service.UserserviceImpl">
+        <property name="stu" ref="StuImpl"></property>
+    </bean>
+    <bean id="StuImpl" class="com.itheima.dao.StuImpl">
+        <property name="template" ref="template"></property>
+    </bean>
+    <bean id="template" class="org.springframework.jdbc.core.JdbcTemplate" scope="prototype">
+        <property name="dataSource" ref="driud"></property>
+    </bean>
+    <!--druid的两种创建方式-->
+    <bean id="driud" class="com.alibaba.druid.pool.DruidDataSource">
+    <property name="driverClassName" value="com.mysql.jdbc.Driver "></property>
+    <property name="url" value="jdbc:mysql:///mybatis "></property>
+    <property name="username" value="root"></property>
+    <property name="password" value="root"></property>
+    </bean>
+    <!--<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSourceFactory" factory-method="createDataSource">
+        <constructor-arg>
+            <map>
+                <entry key="driver" value="com.mysql.jdbc.Driver"></entry>
+                <entry key="url" value="jdbc:mysql:///mybatis"></entry>
+                <entry key="username" value="root"></entry>
+                <entry key="password" value="root"></entry>
+            </map>
+        </constructor-arg>
+
+    </bean>-->
+</beans>
